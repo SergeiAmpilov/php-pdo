@@ -8,11 +8,20 @@ require_once(__DIR__ . '/scripts/functions.php');
 ?>
 
 <?
-  if (isset($_POST['register'])) {
-    registration();
-    header("Location: index.php");
-    die;
-  }
+if (isset($_POST['register'])) {
+  registration();
+  header("Location: index.php");
+  die;
+}
+
+
+if (isset($_POST['auth'])) {
+  login();
+  header("Location: index.php");
+  die;
+}
+
+
 ?>
 
 
@@ -90,28 +99,25 @@ require_once(__DIR__ . '/scripts/functions.php');
   
       <form action="index.php" method="post" class="row g-3">
         <div class="col-md-6 offset-md-3">
-            <div class="form-floating mb-3">
-                <input type="text" name="login" class="form-control" id="floatingInput" placeholder="Имя">
-                <label for="floatingInput">Имя</label>
-            </div>
-        </div>
-  
+          <div class="form-floating mb-3">
+            <input type="text" name="login" class="form-control" id="floatingInput" placeholder="Имя">
+            <label for="floatingInput">Имя</label>
+          </div>
+        </div>  
         <div class="col-md-6 offset-md-3">
-            <div class="form-floating">
-                <input type="password" name="pass" class="form-control" id="floatingPassword"
-                      placeholder="Password">
-                <label for="floatingPassword">Пароль</label>
-            </div>
-        </div>
-  
+          <div class="form-floating">
+            <input type="password" name="pass" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Пароль</label>
+          </div>
+        </div>  
         <div class="col-md-6 offset-md-3">
-            <button type="submit" name="auth" class="btn btn-primary">Войти</button>
+          <button type="submit" name="auth" class="btn btn-primary">Войти</button>
         </div>
       </form>
     <? } else { ?>
       <div class="row">
         <div class="col-md-6 offset-md-3">
-            <p>Добро пожаловать, User! <a href="?do=exit">Log out</a></p>
+            <p>Добро пожаловать, <?= $_SESSION['user']['login'] ?>! <a href="?do=exit">Log out</a></p>
         </div>
       </div>
       <form action="index.php" method="post" class="row g-3 mb-5">
