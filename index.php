@@ -1,7 +1,9 @@
 <?php
 error_reporting(-1);
 
-require_once(__DIR__ . '/db.php');
+
+require_once(__DIR__ . '/scripts/get-env.php');
+require_once(__DIR__ . '/scripts/db.php');
 
 ?>
 
@@ -18,8 +20,5 @@ require_once(__DIR__ . '/db.php');
 </head>
 <body class='container body'>
   <h1>Hello world</h1>
-  <pre>
-    <?= print_r($_ENV, true); ?>
-  </pre>
 </body>
 </html>
