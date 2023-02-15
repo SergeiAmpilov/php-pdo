@@ -2,9 +2,17 @@
 error_reporting(-1);
 session_start();
 
-require_once(__DIR__ . '/scripts/functions.php');
 require_once(__DIR__ . '/scripts/get-env.php');
 require_once(__DIR__ . '/scripts/db.php');
+require_once(__DIR__ . '/scripts/functions.php');
+?>
+
+<?
+  if (isset($_POST['register'])) {
+    registration();
+    header("Location: index.php");
+    die;
+  }
 ?>
 
 
