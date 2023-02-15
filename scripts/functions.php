@@ -72,3 +72,8 @@ function login(): bool {
   }
   return false;
 }
+
+function logout() {
+  unset($_SESSION['user']);
+  $_SESSION['success'] = 'Successful Logout';
+}

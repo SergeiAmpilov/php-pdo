@@ -14,14 +14,17 @@ if (isset($_POST['register'])) {
   die;
 }
 
-
 if (isset($_POST['auth'])) {
   login();
   header("Location: index.php");
   die;
 }
 
-
+if (isset($_GET['do']) && $_GET['do'] === 'exit' && isset($_SESSION['user'])) {
+  logout();
+  header("Location: index.php");
+  die;
+}
 ?>
 
 
@@ -117,7 +120,7 @@ if (isset($_POST['auth'])) {
     <? } else { ?>
       <div class="row">
         <div class="col-md-6 offset-md-3">
-            <p>Добро пожаловать, <?= $_SESSION['user']['login'] ?>! <a href="?do=exit">Log out</a></p>
+            <p>Добро пожаловать, <?= htmlspecialchars($_SESSION['user']['login']) ?>! <a href="?do=exit">Log out</a></p>
         </div>
       </div>
       <form action="index.php" method="post" class="row g-3 mb-5">
