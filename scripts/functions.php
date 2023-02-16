@@ -59,7 +59,7 @@ function login(): bool {
     return false;
   } else {
     if (!password_verify($pass, $user['pass'])) {
-      $_SESSION['errors'] = 'Login or password is incorrect. PWD';
+      $_SESSION['errors'] = 'Login or password is incorrect.';
       return false;
     } else {
       $_SESSION['success'] = 'Successful login';
@@ -76,4 +76,31 @@ function login(): bool {
 function logout() {
   unset($_SESSION['user']);
   $_SESSION['success'] = 'Successful Logout';
+}
+
+function saveMessage(): bool {
+
+  global $pdo;
+
+  $message = trim($_POST['message']) ?: '';
+
+  if (empty($_SESSION['user'])) {
+    $_SESSION['errors'] = 'Need auth.';
+    return false;
+  }
+
+  if (empty($message)) {
+    $_SESSION['errors'] = 'Message is empty. Insert message text.';
+    return false;
+  }
+
+  $res = $pdo->prepare("INSERT INTO messages (name, message) VALUES (?, ?)");
+  if ($res->execute([$_SESSION['user']['login'], $message])) {
+    $_SESSION['success'] = 'Message was successfully added';
+    return true;
+  } else {
+    $_SESSION['errors'] = 'Error.';
+    return false;
+  }
+
 }

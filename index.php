@@ -25,6 +25,12 @@ if (isset($_GET['do']) && $_GET['do'] === 'exit' && isset($_SESSION['user'])) {
   header("Location: index.php");
   die;
 }
+
+if (isset($_POST['add'])) {
+  saveMessage();
+  header("Location: index.php");
+  die;
+}
 ?>
 
 
@@ -125,15 +131,14 @@ if (isset($_GET['do']) && $_GET['do'] === 'exit' && isset($_SESSION['user'])) {
       </div>
       <form action="index.php" method="post" class="row g-3 mb-5">
         <div class="col-md-6 offset-md-3">
-            <div class="form-floating">
-                <textarea class="form-control" name="message" placeholder="Leave a comment here"
-                          id="floatingTextarea" style="height: 100px;"></textarea>
-                <label for="floatingTextarea">Сообщение</label>
-            </div>
+          <div class="form-floating">
+            <textarea class="form-control" name="message" placeholder="Leave a comment here"
+                      id="floatingTextarea" style="height: 100px;"></textarea>
+            <label for="floatingTextarea">Сообщение</label>
+          </div>
         </div>
-  
         <div class="col-md-6 offset-md-3">
-            <button type="submit" name="add" class="btn btn-primary">Отправить</button>
+          <button type="submit" name="add" class="btn btn-primary">Отправить</button>
         </div>
       </form>
   
