@@ -158,9 +158,9 @@ if (isset($_POST['add'])) {
                 foreach ($messages as $message) { ?>
                   <div class="card my-3">
                     <div class="card-body">
-                      <h5 class="card-title">Автор: <?= $message['name'] ?></h5>
+                      <h5 class="card-title">Автор: <?= htmlspecialchars($message['name']) ?></h5>
                       <p class="card-text">
-                        <?= $message['message'] ?>
+                        <?= nl2br(htmlspecialchars($message['message'])) ?>
                       </p>
                       <p>Дата: <?= $message['created_at'] ?></p>
                     </div>
