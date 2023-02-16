@@ -143,18 +143,31 @@ if (isset($_POST['add'])) {
       </form>
   
       <? } ?>
+
+
       <div class="row">
         <div class="col-md-6 offset-md-3">
             <hr>
-            <div class="card my-3">
-                <div class="card-body">
-                    <h5 class="card-title">Автор: User</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis distinctio
-                        est illum in ipsum nemo nostrum odit optio quibusdam velit. Commodi dolores dolorum ex facere
-                        maiores porro, reprehenderit velit voluptatum.</p>
-                    <p>Дата: 01.01.2000</p>
-                </div>
-            </div>
+
+            <? if (!empty($_SESSION['user'])) {
+              $messages = get_messages();
+              // pre($messages);
+              if (empty($messages)) { ?>
+                <p>No messages</p>
+              <? } else {
+                foreach ($messages as $message) { ?>
+                  <div class="card my-3">
+                    <div class="card-body">
+                      <h5 class="card-title">Автор: <?= $message['name'] ?></h5>
+                      <p class="card-text">
+                        <?= $message['message'] ?>
+                      </p>
+                      <p>Дата: <?= $message['created_at'] ?></p>
+                    </div>
+                  </div>
+                <? }
+              }
+            } ?>
         </div>
       </div>
   </div>

@@ -104,3 +104,18 @@ function saveMessage(): bool {
   }
 
 }
+
+function get_messages(): array {
+
+  global $pdo;
+
+  if (empty($_SESSION['user'])) {
+    $_SESSION['errors'] = 'Need auth.';
+    return [];
+  }
+
+  $res = $pdo->prepare("SELECT * FROM messages WHERE name = ?");
+  $res->execute([$_SESSION['user']['login']]);
+  return $res->fetchAll();
+  
+}
